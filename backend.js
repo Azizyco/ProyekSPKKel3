@@ -12,6 +12,7 @@ let dashboard2 = document.getElementById("dashboard2");
 let dashboard3 = document.getElementById("dashboard3");
 
 // Sub-dashboard di Dashboard 1
+let Introdas1 = document.getElementById("Introdas1");
 let kriteriaBobot = document.getElementById("kriteriaBobot");
 let penginputanData = document.getElementById("penginputanData");
 let hasilPerhitungan = document.getElementById("hasilPerhitungan");
@@ -217,16 +218,24 @@ function showDashboard(id) {
   // Tampilkan dashboard yang dipilih
   document.getElementById(id).classList.add("active");
 
-  // Jika yang dipilih adalah dashboard1, tampilkan sub-dashboard default (kriteriaBobot)
-  if (id === "dashboard1") {
-    showSubDashboard("kriteriaBobot");
+  // Jika yang dipilih bukan dashboard1, tutup submenu (jika terbuka)
+  if (id !== "dashboard1") {
+    const submenu = document.querySelector('.menu-item .submenu');
+    if (submenu && submenu.classList.contains("active")) {
+      submenu.classList.remove("active");
+    }
+  } else {
+    // Jika dashboard1 yang dipilih, tampilkan sub-dashboard default
+    showSubDashboard("Introdas1");
   }
 }
+
 
 // -----------------------
 // Fungsi Tampilkan Sub-Dashboard (hanya di Dashboard 1)
 // -----------------------
 function showSubDashboard(id) {
+  Introdas1.classList.remove("active");
   kriteriaBobot.classList.remove("active");
   penginputanData.classList.remove("active");
   hasilPerhitungan.classList.remove("active");
