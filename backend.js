@@ -384,9 +384,9 @@ function renderTabelAlternatif() {
   });
 }
 
-// -----------------------
+
 // Fungsi Hitung SAW
-// -----------------------
+
 function hitungSAW() {
   if (dataAlternatif.length === 0) {
     alert("Belum ada alternatif yang ditambahkan.");
