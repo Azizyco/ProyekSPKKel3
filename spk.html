@@ -3,32 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sistem Pendukung Keputusan Komputer Rakitan ,Mouse Wireless,dan Keyboard Wireless</title>
+  <title>SPK SAW - Komputer Rakitan</title>
   <!-- Link ke file CSS -->
-  <link rel="stylesheet" href="frontend.css"/>
+  <link rel="stylesheet" href="css.css"/>
 </head>
 <body>
+
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <h2>Aplikasi SPK  </h2>
+      <h2>SPK SAW</h2>
       <!-- Tombol close sidebar (opsional) -->
       <span class="close-btn" id="closeSidebar">&times;</span>
     </div>
     <ul class="sidebar-menu">
 
+
       <li class="menu-item">
-        <a href="#" onclick="toggleSubmenuDashboard1()">SPK Komputer Rakitan Dengan SAW</a>
+        <a href="#" onclick="toggleSubmenuDashboard1()">SPK Komputer Rakitan</a>
         <ul class="submenu">
           <li><a href="#" onclick="showSubDashboard('kriteriaBobot')">Penjabaran Kriteria & Bobot</a></li>
           <li><a href="#" onclick="showSubDashboard('penginputanData')">Penginputan Data</a></li>
           <li><a href="#" onclick="showSubDashboard('hasilPerhitungan')">Hasil Perhitungan</a></li>
         </ul>
       </li>
-      
+     
       <li class="menu-item">
-        <a href="#" onclick="showDashboard('dashboard2')">SPK Mouse Wireless/Bluetooth</a>
+          <a href="#" onclick="toggleSubmenuDashboard2()">SPK Mouse Wireless/Bluetooth</a>
+          <ul class="submenu">
+            <li><a href="#" onclick="showSubDashboardMouse('kriteriaBobotMouse')">Penjabaran Kriteria & Bobot</a></li>
+            <li><a href="#" onclick="showSubDashboardMouse('penginputanDataMouse')">Penginputan Data</a></li>
+            <li><a href="#" onclick="showSubDashboardMouse('hasilPerhitunganMouse')">Hasil Perhitungan</a></li>
+          </ul>
+        </li>
+        
       </li>
       <li class="menu-item">
         <a href="#" onclick="showDashboard('dashboard3')">SPK Keyboard Wireless/Bluetooth</a>
@@ -36,24 +45,20 @@
     </ul>
   </div>
 
+
   <!-- Konten Utama -->
   <div class="main-content">
     <!-- Tombol hamburger -->
     <div class="header">
       <span class="burger-btn" id="openSidebar">&#9776;</span>
-      <h1>Aplikasi SPK Komputer Rakitan ,Mouse Wireless,dan Keyboard Wireless</h1>
+      <h1>Selamat Datang di SPK SAW</h1>
     </div>
+
 
     <!-- Dashboard 1: SPK Pemilihan Komputer Rakitan -->
     <div class="dashboard" id="dashboard1">
       <div class="sub-dashboard" id="Introdas1">
         <h2>SPK Rakitan Komputer</h2>
-        <p>
-
-          Spk Rakitan komputer ini menggunakan metode SAW 
-
-
-        </p>
       </div>
       <!-- Sub dashboard 1: Penjabaran Kriteria & Bobot -->
       <div class="sub-dashboard" id="kriteriaBobot">
@@ -174,6 +179,7 @@
         </table>
       </div>
 
+
       <!-- Sub dashboard 2: Penginputan Data -->
       <div class="sub-dashboard" id="penginputanData">
         <h2>Penginputan Data Alternatif</h2>
@@ -185,11 +191,13 @@
             <input type="text" id="namaAlternatif" required />
           </div>
 
+
           <h3>Kriteria 1: Harga (Cost) [Bobot 15%]</h3>
           <div class="form-group">
             <label>Harga (Rp)</label>
             <input type="number" id="harga" required />
           </div>
+
 
           <h3>Kriteria 2: Garansi (Benefit) [Bobot 10%]</h3>
           <div class="form-group">
@@ -204,11 +212,13 @@
             <input type="number" id="garansiBulan" value="0"/>
           </div>
 
+
           <h3>Kriteria 3: Jumlah Fan/Kipas (Benefit) [Bobot 3%]</h3>
           <div class="form-group">
             <label>Jumlah Fan/Kipas</label>
             <input type="number" id="jumlahFan" required />
           </div>
+
 
           <h3>Kriteria 4: Storage (Jenis & Kapasitas) (Benefit) [Bobot 4%]</h3>
           <div class="form-group">
@@ -223,6 +233,7 @@
             <input type="number" id="kapasitasStorage" required />
           </div>
 
+
           <h3>Kriteria 5: Tambahan (Mouse, Keyboard, Speaker) (Benefit) [Bobot 5%]</h3>
           <div class="form-group">
             <label>Ceklist apa saja yang tersedia?</label><br/>
@@ -231,12 +242,14 @@
             <input type="checkbox" id="hasSpeaker" /> Speaker
           </div>
 
+
           <h3>Spesifikasi Monitor</h3>
           <!-- Ukuran Layar -->
           <div class="form-group">
             <label>Ukuran Layar (inch) [Benefit, 5%]</label>
             <input type="number" id="ukuranMonitor" required />
           </div>
+
 
           <!-- Resolusi Layar -->
           <div class="form-group">
@@ -250,11 +263,13 @@
             </select>
           </div>
 
+
           <!-- Refresh Rate -->
           <div class="form-group">
             <label>Refresh Rate (Hz) [Benefit, 5%]</label>
             <input type="number" id="refreshRate" required />
           </div>
+
 
           <!-- Jenis Panel -->
           <div class="form-group">
@@ -279,17 +294,20 @@
             </select>
           </div>
 
+
           <!-- Jumlah Port Monitor -->
           <div class="form-group">
             <label>Jumlah Port (Monitor) [Benefit, 5%]</label>
             <input type="number" id="jumlahPortMonitor" required />
           </div>
 
+
           <!-- Fitur Tambahan Monitor -->
           <div class="form-group">
             <label>Jumlah Fitur Tambahan Monitor [Benefit, 5%]</label>
             <input type="number" id="fiturTambahanMonitor" required />
           </div>
+
 
           <h3>Spesifikasi CPU</h3>
           <!-- Jenis Prosesor -->
@@ -337,6 +355,7 @@
             </select>
           </div>
 
+
           <!-- Kondisi Prosesor -->
           <div class="form-group">
             <label>Kondisi Prosesor [Benefit, 2%]</label>
@@ -345,6 +364,7 @@
               <option value="bekas">Bekas</option>
             </select>
           </div>
+
 
           <!-- Jenis GPU -->
           <div class="form-group">
@@ -399,6 +419,7 @@
             </select>
           </div>
 
+
           <!-- Kondisi GPU -->
           <div class="form-group">
             <label>Kondisi GPU [Benefit, 2%]</label>
@@ -407,6 +428,7 @@
               <option value="bekas">Bekas</option>
             </select>
           </div>
+
 
           <h3>Spesifikasi Motherboard</h3>
           <!-- Slot RAM -->
@@ -436,12 +458,14 @@
             <input type="number" id="slotPCIe" required />
           </div>
 
+
           <!-- Tombol -->
           <div class="form-actions">
             <button type="button" onclick="tambahAlternatif()">Tambah Alternatif</button>
             <button type="button" onclick="hitungSAW()">Hitung SAW</button>
           </div>
         </form>
+
 
         <!-- Tabel Alternatif yang sudah diinput -->
         <h3>Daftar Alternatif</h3>
@@ -467,25 +491,165 @@
         </table>
       </div>
 
+
       <!-- Sub dashboard 3: Hasil Perhitungan -->
       <div class="sub-dashboard" id="hasilPerhitungan">
         <h2>Hasil Perhitungan SAW</h2>
         <p>Di bawah ini adalah tabel hasil normalisasi dan perhitungan akhir.</p>
 
+
         <!-- Tabel Normalisasi & Skor Akhir -->
         <div id="hasilPerhitunganContainer">
         </div>
+
 
         <!-- Chart (opsional) -->
         <canvas id="chartHasil" width="400" height="200"></canvas>
       </div>
     </div>
 
+
+
     <!-- Dashboard 2: SPK Mouse Wireless/Bluetooth -->
     <div class="dashboard" id="dashboard2">
-      <h2>SPK Mouse Wireless/Bluetooth</h2>
-      <p>IN MAINTENANCE</p>
+      <!-- Penjabaran Kriteria & Bobot Mouse -->
+<div class="sub-dashboard" id="kriteriaBobotMouse">
+  <h2>Penghinputan jenis kriteria dan Hitung bobot</h2>
+  <form id="formKriteriaMouse">
+    <table class="table-kriteria">
+      <thead>
+        <tr>
+          <th>Kriteria</th>
+          <th>Jenis (Benefit/Cost)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Harga</td>
+          <td>
+            <select name="jenisHarga" required>
+              <option value="cost">Cost</option>
+              <option value="benefit">Benefit</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Jenis Koneksi</td>
+          <td>
+            <select name="jenisKoneksi" required>
+              <option value="benefit">Benefit</option>
+              <option value="cost">Cost</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>DPI</td>
+          <td>
+            <select name="jenisDPI" required>
+              <option value="benefit">Benefit</option>
+              <option value="cost">Cost</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Baterai (mAh)</td>
+          <td>
+            <select name="jenisBaterai" required>
+              <option value="benefit">Benefit</option>
+              <option value="cost">Cost</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Fitur Tambahan</td>
+          <td>
+            <select name="jenisFitur" required>
+              <option value="benefit">Benefit</option>
+              <option value="cost">Cost</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="form-actions">
+      <button type="button" onclick="hitungBobotAHP()">Hitung Bobot dengan AHP</button>
     </div>
+  </form>
+</div>
+
+    
+      <!-- Penginputan Data Mouse -->
+      <div class="sub-dashboard" id="penginputanDataMouse">
+        <h2>Penginputan Data Mouse Wireless/Bluetooth</h2>
+
+        <form id="formMouse">
+          <div class="form-group">
+            <label>Nama Mouse:</label>
+            <input type="text" id="namaMouse" required />
+          </div>
+      
+          <div class="form-group">
+            <label>Harga (Rp) [Cost 25%]</label>
+            <input type="number" id="hargaMouse" required />
+          </div>
+      
+          <div class="form-group">
+            <label>Jenis Koneksi (Benefit 20%)</label>
+            <select id="koneksiMouse">
+              <option value="Bluetooth">Bluetooth</option>
+              <option value="Wireless 2.4 GHz">Wireless 2.4 GHz</option>
+              <option value="Dual Mode">Dual Mode</option>
+            </select>
+          </div>
+      
+          <div class="form-group">
+            <label>DPI (Benefit 20%)</label>
+            <input type="number" id="dpiMouse" required />
+          </div>
+      
+          <div class="form-group">
+            <label>Kapasitas Baterai (mAh) (Benefit 20%)</label>
+            <input type="number" id="bateraiMouse" required />
+          </div>
+      
+          <div class="form-group">
+            <label>Fitur Tambahan (Benefit 15%)</label>
+            <input type="number" id="fiturMouse" placeholder="Jumlah fitur tambahan (LED, silent-click, dll)" required />
+          </div>
+      
+          <div class="form-actions">
+            <button type="button" onclick="tambahMouse()">Tambah Alternatif</button>
+            <button type="button" onclick="hitungMouseSAW()">Hitung SAW</button>
+          </div>
+        </form>
+      
+        <h3>Daftar Alternatif Mouse</h3>
+        <table id="tabelMouse" class="table-alternatif">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Harga</th>
+              <th>Koneksi</th>
+              <th>DPI</th>
+              <th>Baterai (mAh)</th>
+              <th>Fitur Tambahan</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      
+        <div id="hasilMouseSAW"></div>
+      </div>
+    
+      <!-- Hasil Perhitungan Mouse -->
+      <div class="sub-dashboard" id="hasilPerhitunganMouse">
+        <h2>Hasil Perhitungan Mouse Wireless/Bluetooth</h2>
+        <div id="hasilMouseSAW"></div>
+      </div>
+    
+
 
     <!-- Dashboard 3: SPK Keyboard Wireless/Bluetooth -->
     <div class="dashboard" id="dashboard3">
@@ -494,7 +658,8 @@
     </div>
   </div>
 
+
   <!-- Link ke file JS -->
-  <script src="backend.js"></script>
+  <script src="js.js"></script>
 </body>
 </html>

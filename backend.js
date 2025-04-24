@@ -6,10 +6,12 @@ let sidebar = document.getElementById("sidebar");
 let openSidebarBtn = document.getElementById("openSidebar");
 let closeSidebarBtn = document.getElementById("closeSidebar");
 
+
 // Dashboard container
 let dashboard1 = document.getElementById("dashboard1");
 let dashboard2 = document.getElementById("dashboard2");
 let dashboard3 = document.getElementById("dashboard3");
+
 
 // Sub-dashboard di Dashboard 1
 let Introdas1 = document.getElementById("Introdas1");
@@ -17,8 +19,10 @@ let kriteriaBobot = document.getElementById("kriteriaBobot");
 let penginputanData = document.getElementById("penginputanData");
 let hasilPerhitungan = document.getElementById("hasilPerhitungan");
 
+
 // Data Alternatif
 let dataAlternatif = [];
+
 
 // Bobot kriteria (sesuai urutan definisi, total 100%)
 const bobot = {
@@ -65,6 +69,8 @@ const bobot = {
 };
 
 
+
+
 // Skor panel (contoh)
 const skorPanel = {
   "IPS": 5,
@@ -85,6 +91,7 @@ const skorPanel = {
   "e-Ink": 3.5
 };
 
+
 // Skor resolusi (contoh; Anda bisa menyesuaikan lagi)
 const skorResolusi = {
   "1280x720": 921600,
@@ -93,6 +100,7 @@ const skorResolusi = {
   "3840x2160": 8294400,
   "5120x2880": 14745600
 };
+
 
 // Skor prosesor (sangat disederhanakan, isi sesuai tabel di atas)
 const skorProsesor = {
@@ -113,6 +121,7 @@ const skorProsesor = {
   "Core i7-13700K": 28000,
   "Core i9-13900K": 35000,
 
+
   "Ryzen 3 3100": 8000,
   "Ryzen 5 3600": 14000,
   "Ryzen 7 3700X": 19000,
@@ -130,6 +139,7 @@ const skorProsesor = {
   "Ryzen 7 7700X": 25000,
   "Ryzen 9 7900X": 30000
 };
+
 
 // Skor GPU (disederhanakan, gunakan Benchmark Score misalnya)
 const skorGPU = {
@@ -159,6 +169,7 @@ const skorGPU = {
   "RTX 4090": 22000,
   "RTX 5090": 28000,
 
+
   "RX 580": 5500,
   "RX 590": 6200,
   "RX 5600 XT": 8200,
@@ -169,10 +180,14 @@ const skorGPU = {
   "RX 7900 XT": 19500,
   "RX 7900 XTX": 21500,
 
+
   "Arc A380": 5000,
   "Arc A750": 9500,
   "Arc A770": 10500
 };
+
+
+
 
 
 
@@ -182,13 +197,30 @@ function toggleSubmenuDashboard1() {
   // Panggil fungsi untuk menampilkan dashboard1 (jika diperlukan)
   showDashboard('dashboard1');
 
+
   // Cari submenu dari menu-item ini (pastikan struktur HTML sesuai)
   const submenu = document.querySelector('.menu-item .submenu');
   // Toggle kelas 'active'
   submenu.classList.toggle('active');
 }
 
+function toggleSubmenuDashboard2() {
+  showDashboard('dashboard2');
+  const submenu = document.querySelectorAll('.menu-item .submenu')[1];
+  submenu.classList.toggle('active');
+}
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  showDashboard("dashboard1");
+});
+
+function showSubDashboardMouse(id) {
+  ['kriteriaBobotMouse', 'penginputanDataMouse', 'hasilPerhitunganMouse'].forEach(sub => {
+    document.getElementById(sub).classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
 
 // -----------------------
 // Fungsi Tampilkan Sidebar
@@ -196,39 +228,47 @@ function toggleSubmenuDashboard1() {
 // Tambahkan variabel mainContent
 
 
+
+
 openSidebarBtn.addEventListener("click", function() {
   sidebar.classList.remove("hidden");
   mainContent.classList.remove("full");
 });
+
 
 closeSidebarBtn.addEventListener("click", function() {
   sidebar.classList.add("hidden");
   mainContent.classList.add("full");
 });
 
+
 // -----------------------
 // Fungsi Tampilkan Dashboard
 // -----------------------
 function showDashboard(id) {
-  // Sembunyikan semua dashboard
   dashboard1.classList.remove("active");
   dashboard2.classList.remove("active");
   dashboard3.classList.remove("active");
-
-  // Tampilkan dashboard yang dipilih
+  
   document.getElementById(id).classList.add("active");
 
-  // Jika yang dipilih bukan dashboard1, tutup submenu (jika terbuka)
   if (id !== "dashboard1") {
-    const submenu = document.querySelector('.menu-item .submenu');
-    if (submenu && submenu.classList.contains("active")) {
-      submenu.classList.remove("active");
-    }
+    const submenu1 = document.querySelectorAll('.menu-item .submenu')[0];
+    submenu1.classList.remove("active");
   } else {
-    // Jika dashboard1 yang dipilih, tampilkan sub-dashboard default
     showSubDashboard("Introdas1");
   }
+
+  if (id !== "dashboard2") {
+    const submenu2 = document.querySelectorAll('.menu-item .submenu')[1];
+    submenu2.classList.remove("active");
+  } else {
+    showSubDashboardMouse("kriteriaBobotMouse");
+  }
 }
+
+
+
 
 
 // -----------------------
@@ -240,14 +280,17 @@ function showSubDashboard(id) {
   penginputanData.classList.remove("active");
   hasilPerhitungan.classList.remove("active");
 
+
   document.getElementById(id).classList.add("active");
 }
+
 
 // -----------------------
 // Event onChange Garansi
 // -----------------------
 let garansiSelect = document.getElementById("garansi");
 let garansiBulanGroup = document.getElementById("garansiBulanGroup");
+
 
 garansiSelect.addEventListener("change", function() {
   if (this.value === "ya") {
@@ -256,6 +299,7 @@ garansiSelect.addEventListener("change", function() {
     garansiBulanGroup.style.display = "none";
   }
 });
+
 
 // -----------------------
 // Fungsi Tambah Alternatif
@@ -270,10 +314,12 @@ function tambahAlternatif() {
   let jenisStorage = document.getElementById("jenisStorage").value;
   let kapasitasStorage = parseFloat(document.getElementById("kapasitasStorage").value) || 0;
 
+
   // Tambahan (Mouse, Keyboard, Speaker)
   let hasMouse = document.getElementById("hasMouse").checked;
   let hasKeyboard = document.getElementById("hasKeyboard").checked;
   let hasSpeaker = document.getElementById("hasSpeaker").checked;
+
 
   let ukuranMonitor = parseFloat(document.getElementById("ukuranMonitor").value) || 0;
   let resolusiMonitor = document.getElementById("resolusiMonitor").value;
@@ -282,26 +328,32 @@ function tambahAlternatif() {
   let jumlahPortMonitor = parseFloat(document.getElementById("jumlahPortMonitor").value) || 0;
   let fiturTambahanMonitor = parseFloat(document.getElementById("fiturTambahanMonitor").value) || 0;
 
+
   let jenisProsesor = document.getElementById("jenisProsesor").value;
   let kondisiProsesor = document.getElementById("kondisiProsesor").value;
   let jenisGPU = document.getElementById("jenisGPU").value;
   let kondisiGPU = document.getElementById("kondisiGPU").value;
 
+
   let slotRAM = parseFloat(document.getElementById("slotRAM").value) || 0;
   let kecepatanRAM = parseFloat(document.getElementById("kecepatanRAM").value) || 0;
   let slotSSD = parseFloat(document.getElementById("slotSSD").value) || 0;
+
 
   // Fitur tambahan Mobo
   let moboWifi = document.getElementById("moboWifi").checked;
   let moboBluetooth = document.getElementById("moboBluetooth").checked;
 
+
   let slotPCIe = parseFloat(document.getElementById("slotPCIe").value) || 0;
+
 
   // Validasi nama
   if (!namaAlternatif) {
     alert("Nama Alternatif harus diisi.");
     return;
   }
+
 
   // Bentuk object data
   let obj = {
@@ -333,16 +385,20 @@ function tambahAlternatif() {
     slotPCIe
   };
 
+
   // Masukkan ke array
   dataAlternatif.push(obj);
 
+
   // Tampilkan di tabel
   renderTabelAlternatif();
+
 
   // Reset form (opsional)
   document.getElementById("formAlternatif").reset();
   garansiBulanGroup.style.display = "none";
 }
+
 
 // -----------------------
 // Fungsi Render Tabel Alternatif
@@ -350,6 +406,7 @@ function tambahAlternatif() {
 function renderTabelAlternatif() {
   let tbody = document.querySelector("#tabelAlternatif tbody");
   tbody.innerHTML = "";
+
 
   dataAlternatif.forEach((item, index) => {
     let tr = document.createElement("tr");
@@ -375,7 +432,7 @@ function renderTabelAlternatif() {
         ${item.jenisGPU} (${item.kondisiGPU})
       </td>
       <td>
-        Slot RAM:${item.slotRAM} | ${item.kecepatanRAM}MHz | Slot SSD:${item.slotSSD} | 
+        Slot RAM:${item.slotRAM} | ${item.kecepatanRAM}MHz | Slot SSD:${item.slotSSD} |
         ${item.moboWifi ? "WiFi " : ""}${item.moboBluetooth ? "Bluetooth " : ""}|
         Slot PCIe:${item.slotPCIe}
       </td>
@@ -385,7 +442,10 @@ function renderTabelAlternatif() {
 }
 
 
+
+
 // Fungsi Hitung SAW
+
 
 function hitungSAW() {
   if (dataAlternatif.length === 0) {
@@ -393,25 +453,31 @@ function hitungSAW() {
     return;
   }
 
+
   // 1. Buat array untuk menampung nilai setiap kriteria sebelum normalisasi
   let matrix = [];
+
 
   // 2. Konversi data ke dalam bentuk numeric (untuk kriteria benefit/cost)
   dataAlternatif.forEach((alt) => {
     // 1) Harga (Cost) -> Semakin kecil semakin baik
     let cHarga = alt.harga;
 
+
     // 2) Garansi (Benefit) -> Semakin besar (lama garansi) semakin baik
     // jika "tidak" => 0, jika "ya" => garansiBulan
     let cGaransi = (alt.garansi === "ya") ? alt.garansiBulan : 0;
 
+
     // 3) Jumlah Fan (Benefit)
     let cFan = alt.jumlahFan;
+
 
     // 4) Storage (Jenis & Kapasitas) (Benefit)
     // misal kita beri penambahan skor 1000 jika SSD, 500 jika HDD, lalu ditambah kapasitas
     let baseStorage = (alt.jenisStorage === "SSD") ? 1000 : 500;
     let cStorage = baseStorage + alt.kapasitasStorage;
+
 
     // 5) Tambahan (Mouse, Keyboard, Speaker) (Benefit)
     // Apabila tidak ada => 0, ada 1 => 1, ada 2 => 2, ada 3 => 3
@@ -420,46 +486,60 @@ function hitungSAW() {
     if (alt.hasKeyboard) cTambahan++;
     if (alt.hasSpeaker) cTambahan++;
 
+
     // 6) Ukuran Layar Monitor (Benefit)
     let cUkuranMonitor = alt.ukuranMonitor;
+
 
     // 7) Resolusi Layar (Benefit) -> gunakan skorResolusi
     let cResolusiMonitor = skorResolusi[alt.resolusiMonitor] || 0;
 
+
     // 8) Refresh Rate (Benefit)
     let cRefreshRate = alt.refreshRate;
+
 
     // 9) Jenis Panel (Benefit) -> gunakan skorPanel
     let cJenisPanel = skorPanel[alt.jenisPanel] || 0;
 
+
     // 10) Jumlah Port Monitor (Benefit)
     let cJumlahPortMonitor = alt.jumlahPortMonitor;
+
 
     // 11) Fitur Tambahan Monitor (Benefit)
     let cFiturTambahanMonitor = alt.fiturTambahanMonitor;
 
+
     // 12) Jenis Prosesor (Benefit) -> skorProsesor
     let cJenisProsesor = skorProsesor[alt.jenisProsesor] || 0;
+
 
     // 13) Kondisi Prosesor (Benefit)
     // Baru => 2, Bekas => 1 (misal)
     let cKondisiProsesor = (alt.kondisiProsesor === "baru") ? 2 : 1;
 
+
     // 14) Jenis GPU (Benefit) -> skorGPU
     let cJenisGPU = skorGPU[alt.jenisGPU] || 0;
+
 
     // 15) Kondisi GPU (Benefit)
     // Baru => 2, Bekas => 1
     let cKondisiGPU = (alt.kondisiGPU === "baru") ? 2 : 1;
 
+
     // 16) Slot RAM (Benefit)
     let cSlotRAM = alt.slotRAM;
+
 
     // 17) Kecepatan RAM (MHz) (Benefit)
     let cKecepatanRAM = alt.kecepatanRAM;
 
+
     // 18) Slot SSD (Benefit)
     let cSlotSSD = alt.slotSSD;
+
 
     // 19) Fitur Tambahan Mobo (Benefit)
     // jika wifi & bluetooth => 2, jika salah satu => 1, jika tidak ada => 0
@@ -467,8 +547,10 @@ function hitungSAW() {
     if (alt.moboWifi) cFiturTambahanMobo++;
     if (alt.moboBluetooth) cFiturTambahanMobo++;
 
+
     // 20) Slot PCIe (Benefit)
     let cSlotPCIe = alt.slotPCIe;
+
 
     matrix.push({
       alt: alt.namaAlternatif,
@@ -496,6 +578,7 @@ function hitungSAW() {
     });
   });
 
+
   // 3. Cari max/min untuk setiap kriteria
   // cost -> min, benefit -> max
   let minHarga = Math.min(...matrix.map(m => m.harga));
@@ -519,10 +602,12 @@ function hitungSAW() {
   let maxFiturTambahanMobo = Math.max(...matrix.map(m => m.fiturTambahanMobo));
   let maxSlotPCIe = Math.max(...matrix.map(m => m.slotPCIe));
 
+
   // 4. Normalisasi
   let normalisasi = matrix.map(m => {
     // cost -> min / x
     let nHarga = (m.harga === 0) ? 0 : (minHarga / m.harga);
+
 
     // benefit -> x / max
     let nGaransi = (maxGaransi === 0) ? 0 : (m.garansi / maxGaransi);
@@ -544,6 +629,7 @@ function hitungSAW() {
     let nSlotSSD = (maxSlotSSD === 0) ? 0 : (m.slotSSD / maxSlotSSD);
     let nFiturTambahanMobo = (maxFiturTambahanMobo === 0) ? 0 : (m.fiturTambahanMobo / maxFiturTambahanMobo);
     let nSlotPCIe = (maxSlotPCIe === 0) ? 0 : (m.slotPCIe / maxSlotPCIe);
+
 
     return {
       alt: m.alt,
@@ -570,6 +656,7 @@ function hitungSAW() {
     };
   });
 
+
   // 5. Hitung skor akhir (dengan bobot)
   let hasil = normalisasi.map(n => {
     let skor =
@@ -594,18 +681,127 @@ function hitungSAW() {
       (n.nFiturTambahanMobo * bobot.fiturTambahanMobo) +
       (n.nSlotPCIe * bobot.slotPCIe);
 
+
     return {
       alt: n.alt,
       skor
     };
   });
 
+
   // Urutkan hasil
   hasil.sort((a, b) => b.skor - a.skor);
+
 
   // Tampilkan di sub-dashboard hasilPerhitungan
   showSubDashboard("hasilPerhitungan");
   renderHasilSAW(normalisasi, hasil);
+}
+
+// -----------------------
+// SPK Mouse Wireless/Bluetooth
+// -----------------------
+
+let dataMouse = [];
+
+function tambahMouse() {
+  const mouse = {
+    nama: document.getElementById('namaMouse').value,
+    harga: Number(document.getElementById('hargaMouse').value),
+    koneksi: document.getElementById('koneksiMouse').value,
+    dpi: Number(document.getElementById('dpiMouse').value),
+    baterai: Number(document.getElementById('bateraiMouse').value),
+    fitur: Number(document.getElementById('fiturMouse').value),
+  };
+
+  dataMouse.push(mouse);
+  renderTabelMouse();
+  document.getElementById('formMouse').reset();
+}
+
+function renderTabelMouse() {
+  const tbody = document.querySelector('#tabelMouse tbody');
+  tbody.innerHTML = '';
+  dataMouse.forEach((m, i) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${m.nama}</td>
+        <td>${m.harga}</td>
+        <td>${m.koneksi}</td>
+        <td>${m.dpi}</td>
+        <td>${m.baterai}</td>
+        <td>${m.fitur}</td>
+      </tr>`;
+  });
+}
+
+function hitungMouseAHP() {
+  const bobotKriteria = {
+    harga: 0.25,
+    koneksi: 0.20,
+    dpi: 0.20,
+    baterai: 0.20,
+    fitur: 0.15
+  };
+
+  const koneksiSkor = { "Bluetooth": 1, "Wireless 2.4 GHz": 2, "Dual Mode": 3 };
+
+  let matrix = {
+    harga: dataMouse.map(m => 1 / m.harga), // cost
+    koneksi: dataMouse.map(m => koneksiSkor[m.koneksi]),
+    dpi: dataMouse.map(m => m.dpi),
+    baterai: dataMouse.map(m => m.baterai),
+    fitur: dataMouse.map(m => m.fitur)
+  };
+
+  function normalisasi(arr) {
+    const sum = arr.reduce((acc, val) => acc + val, 0);
+    return arr.map(v => v / sum);
+  }
+
+  let normalMatrix = {
+    harga: normalisasi(matrix.harga),
+    koneksi: normalisasi(matrix.koneksi),
+    dpi: normalisasi(matrix.dpi),
+    baterai: normalisasi(matrix.baterai),
+    fitur: normalisasi(matrix.fitur)
+  };
+
+  let hasil = dataMouse.map((m, i) => {
+    let skorAkhir =
+      (normalMatrix.harga[i] * bobotKriteria.harga) +
+      (normalMatrix.koneksi[i] * bobotKriteria.koneksi) +
+      (normalMatrix.dpi[i] * bobotKriteria.dpi) +
+      (normalMatrix.baterai[i] * bobotKriteria.baterai) +
+      (normalMatrix.fitur[i] * bobotKriteria.fitur);
+
+    return { nama: m.nama, skor: skorAkhir };
+  });
+
+  hasil.sort((a, b) => b.skor - a.skor);
+
+  let output = `
+    <h3>Hasil SPK AHP Mouse</h3>
+    <table class="table-hasil">
+      <tr>
+        <th>Peringkat</th>
+        <th>Nama Mouse</th>
+        <th>Skor Akhir</th>
+      </tr>`;
+
+  hasil.forEach((h, idx) => {
+    output += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${h.nama}</td>
+        <td>${h.skor.toFixed(4)}</td>
+      </tr>`;
+  });
+
+  output += `</table>`;
+
+  document.getElementById('hasilMouseAHP').innerHTML = output;
 }
 
 // -----------------------
@@ -614,6 +810,7 @@ function hitungSAW() {
 function renderHasilSAW(normalisasi, hasil) {
   let container = document.getElementById("hasilPerhitunganContainer");
   container.innerHTML = "";
+
 
   // Tabel normalisasi
   let tableNorm = document.createElement("table");
@@ -646,6 +843,7 @@ function renderHasilSAW(normalisasi, hasil) {
   `;
   let tbodyNorm = document.createElement("tbody");
 
+
   normalisasi.forEach(n => {
     let tr = document.createElement("tr");
     tr.innerHTML = `
@@ -674,9 +872,11 @@ function renderHasilSAW(normalisasi, hasil) {
     tbodyNorm.appendChild(tr);
   });
 
+
   tableNorm.appendChild(theadNorm);
   tableNorm.appendChild(tbodyNorm);
   container.appendChild(tableNorm);
+
 
   // Tabel skor akhir
   let tableHasil = document.createElement("table");
@@ -691,6 +891,7 @@ function renderHasilSAW(normalisasi, hasil) {
   `;
   let tbodyHasil = document.createElement("tbody");
 
+
   hasil.forEach((h, i) => {
     let tr = document.createElement("tr");
     tr.innerHTML = `
@@ -701,9 +902,11 @@ function renderHasilSAW(normalisasi, hasil) {
     tbodyHasil.appendChild(tr);
   });
 
+
   tableHasil.appendChild(theadHasil);
   tableHasil.appendChild(tbodyHasil);
   container.appendChild(tableHasil);
+
 
   // Buat chart (opsional, memerlukan Chart.js atau library lain).
   // Contoh singkat (harus load Chart.js di head jika ingin pakai):
@@ -712,6 +915,7 @@ function renderHasilSAW(normalisasi, hasil) {
   if (window.hasOwnProperty("chartInstance")) {
     window.chartInstance.destroy();
   }
+
 
   let labels = hasil.map(h => h.alt);
   let scores = hasil.map(h => h.skor);
@@ -736,3 +940,4 @@ function renderHasilSAW(normalisasi, hasil) {
     }
   });
 }
+
