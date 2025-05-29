@@ -59,7 +59,7 @@ function exportToPDF(results, criteriaNames, criteriaTypes, weights) {
   doc.text('Kriteria', 22, y + 5.5);
   doc.text('Bobot', 77, y + 5.5);
   doc.text('Tipe', 107, y + 5.5);
-  y += 8;
+  y += 9;
   
   // Add criteria rows
   doc.setTextColor(0, 0, 0);
@@ -169,7 +169,7 @@ function exportToPDF(results, criteriaNames, criteriaTypes, weights) {
         
         html2canvas(barChart).then(canvas => {
           const imgData = canvas.toDataURL('image/png');
-          doc.addImage(imgData, 'PNG', 20, 40, 170, 80);
+          doc.addImage(imgData, 'PNG', 20, 40, 200, 100);
           
           // Add radar chart after bar chart is added
           const radarChart = document.getElementById('radarChart');
@@ -179,7 +179,7 @@ function exportToPDF(results, criteriaNames, criteriaTypes, weights) {
             
             html2canvas(radarChart).then(canvas => {
               const imgData = canvas.toDataURL('image/png');
-              doc.addImage(imgData, 'PNG', 35, 140, 140, 80);
+              doc.addImage(imgData, 'PNG', 35, 140, 140, 100);
               
               // Save PDF after all charts are added
               doc.save(`SPK_${isMousePage ? 'Mouse' : 'Keyboard'}_${today.toISOString().split('T')[0]}.pdf`);

@@ -264,3 +264,98 @@ document.addEventListener('DOMContentLoaded', () => {
   
   document.head.appendChild(style);
 });
+
+// Preset skenario AHP untuk Keyboard
+const keyboardScenarios = {
+  price: [
+    [1,5,5,5,5,5,5],
+    [0.2,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1]
+  ],
+  durability: [
+    [1,0.2,1,1,1,1,1],
+    [5,1,5,5,5,5,5],
+    [1,0.2,1,1,1,1,1],
+    [1,0.2,1,1,1,1,1],
+    [1,0.2,1,1,1,1,1],
+    [1,0.2,1,1,1,1,1],
+    [1,0.2,1,1,1,1,1]
+  ],
+  feature: [
+    [1,1,5,1,1,5,1],
+    [1,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1]
+  ],
+  layout: [
+    [1,1,1,1,5,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1]
+  ],
+  battery: [
+    [1,1,1,1,1,1,5],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [0.2,1,1,1,1,1,1]
+  ],
+  balanced: Array(7).fill().map(()=>Array(7).fill(1))
+};
+
+const scenarioDescriptions = {
+  price: "Memprioritaskan kriteria Harga di atas kriteria lain (nilai perbandingan 5:1 terhadap kriteria lain).",
+  durability: "Memprioritaskan Garansi dan Bahan (nilai 5:1), mode lain menyesuaikan.",
+  feature: "Memprioritaskan Jumlah Fitur Tambahan (nilai 5:1).",
+  layout: "Memprioritaskan Ukuran Layout (nilai 5:1).",
+  battery: "Memprioritaskan kapasitas baterai (nilai 5:1).",
+  balanced: "Semua kriteria dianggap sama penting (nilai 1:1)."
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Scenario dropdown logic
+  const scenarioSelect = document.getElementById('ahpScenario');
+  const scenarioDesc = document.getElementById('scenarioDescription');
+  const loadScenarioBtn = document.getElementById('loadScenario');
+
+  if (scenarioSelect && scenarioDesc) {
+    scenarioDesc.textContent = scenarioDescriptions[scenarioSelect.value] || '';
+    scenarioSelect.addEventListener('change', function() {
+      scenarioDesc.textContent = scenarioDescriptions[this.value] || '';
+    });
+  }
+
+  if (loadScenarioBtn && scenarioSelect) {
+    loadScenarioBtn.addEventListener('click', function() {
+      const preset = keyboardScenarios[scenarioSelect.value];
+      if (!preset) return;
+      // Update matrix inputs
+      for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
+          const input = document.getElementById(`comparison_${i}_${j}`);
+          if (input) {
+            if (i === j) {
+              input.value = 1;
+            } else if (i < j) {
+              input.value = preset[i][j];
+              // Trigger change event to update reciprocal
+              input.dispatchEvent(new Event('change'));
+            }
+          }
+        }
+      }
+    });
+  }
+});

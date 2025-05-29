@@ -596,6 +596,9 @@ textarea:focus {
   border-radius: var(--border-radius-md);
   padding: var(--spacing-md);
   border: 1px solid var(--border-color);
+
+  max-height: 700px;
+  margin: auto;
 }
 
 .chart-container h3 {
