@@ -30,9 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sidebar toggle for mobile
   const sidebarToggle = document.getElementById('sidebarToggle');
   const sidebar = document.getElementById('sidebar');
-  
-  if (sidebarToggle && sidebar) {
-    sidebarToggle.addEventListener('click', () => {
+  var contentHeaderSidebarToggle = document.getElementById('contentHeaderSidebarToggle');
+  if (contentHeaderSidebarToggle && sidebar) {
+    contentHeaderSidebarToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
       sidebar.classList.toggle('active');
     });
     

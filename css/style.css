@@ -749,6 +749,12 @@ textarea:focus {
 }
 
 /* Responsive Styles */
+
+@media screen and (max-width: 1200px) {
+  .home-footer {
+    top: 82%;
+  }
+}
 @media screen and (max-width: 992px) {
   .visualization {
     grid-template-columns: 1fr;
@@ -756,6 +762,18 @@ textarea:focus {
   
   .alternatives-container {
     grid-template-columns: 1fr;
+  }
+  .home-footer {
+    top: 82%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: none;
+  }
+  .content-header-toggle {
+    display: block !important;
   }
 }
 
@@ -774,6 +792,10 @@ textarea:focus {
   
   .sidebar-toggle {
     display: block;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1101;
   }
   
   .home-buttons {
@@ -793,6 +815,16 @@ textarea:focus {
   
   .export-buttons {
     flex-direction: column;
+  }
+  .theme-toggle {
+    margin-top: 50px;
+  }
+  .home-footer {
+    position: relative;
+    gap: 2px;
+  }
+  .home-footer p{
+    display: none;
   }
 }
 
