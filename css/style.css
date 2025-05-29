@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #3366CC;
-  --primary-light: #5C85E6;
-  --primary-dark: #254B99;
+  --primary-color: #297dca;
+  --primary-light: #0447c4;
+  --primary-dark: #125594;
   
   --secondary-color: #00A896;
   --secondary-light: #02C3B2;
@@ -15,7 +15,7 @@
   --warning-color: #FFD166;
   --error-color: #EF476F;
   
-  --background-color: #FFFFFF;
+  --background-color: #f7f7f7;
   --card-color: #FFFFFF;
   --text-color: #333333;
   --text-light: #666666;
@@ -43,9 +43,9 @@
 
 /* Dark Theme */
 [data-theme="dark"] {
-  --primary-color: #4D79FF;
-  --primary-light: #6C90FF;
-  --primary-dark: #3A66E3;
+  --primary-color: #018fee;
+  --primary-light: #001658;
+  --primary-dark: #0492ca;
   
   --secondary-color: #00BFB2;
   --secondary-light: #02D8CB;
