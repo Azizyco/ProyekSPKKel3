@@ -372,10 +372,31 @@ input, select, textarea {
   margin-bottom: 0;
   color: var(--primary-color);
 }
-
+.glossary-item ul{
+  list-style: none;
+}
 .card-body {
   padding: var(--spacing-lg);
 }
+.scenario-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.scenario-list li {
+  margin-bottom: 1rem;
+}
+.scenario-list h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+.scenario-list p {
+  margin: 0;
+  color: var(--text-color);
+}
+
+
+
 
 /* Form Styles */
 .form-group {
@@ -682,7 +703,15 @@ textarea:focus {
 
 .method-explanation {
   display: grid;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm);
+}
+.method-explanation ol{
+  margin: 1rem;
+  padding: 0;
+}
+.method-explanation ol li{
+  margin: 2;
+  padding: 0;
 }
 
 .glossary {
