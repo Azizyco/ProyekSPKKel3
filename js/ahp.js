@@ -73,14 +73,33 @@ function updateReciprocalValue(event) {
   const inputId = event.target.id;
   const [_, i, j] = inputId.split('_').map(Number);
   
-  const value = parseFloat(event.target.value);
-  if (isNaN(value) || value < 1 || value > 9) {
+  let valueStr = event.target.value;
+  let value = parseFraction(valueStr);
+  if (isNaN(value) || value <= 0) {
     event.target.value = 1;
-    return;
+    value = 1;
   }
   
   const reciprocalInput = document.getElementById(`comparison_${j}_${i}`);
   reciprocalInput.value = (1 / value).toFixed(3);
+}
+
+// Parse input as fraction if needed
+function parseFraction(str) {
+  if (typeof str !== 'string') return NaN;
+  str = str.trim();
+  if (str.includes('/')) {
+    const parts = str.split('/');
+    if (parts.length === 2) {
+      const num = parseFloat(parts[0]);
+      const denom = parseFloat(parts[1]);
+      if (!isNaN(num) && !isNaN(denom) && denom !== 0) {
+        return num / denom;
+      }
+    }
+    return NaN;
+  }
+  return parseFloat(str);
 }
 
 // Calculate weights using AHP
@@ -93,7 +112,7 @@ function calculateAHP(criteriaNames) {
     matrix[i] = [];
     for (let j = 0; j < n; j++) {
       const inputElement = document.getElementById(`comparison_${i}_${j}`);
-      matrix[i][j] = parseFloat(inputElement.value);
+      matrix[i][j] = parseFraction(inputElement.value);
     }
   }
   

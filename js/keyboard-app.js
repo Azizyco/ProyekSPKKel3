@@ -268,60 +268,60 @@ document.addEventListener('DOMContentLoaded', () => {
 // Preset skenario AHP untuk Keyboard
 const keyboardScenarios = {
   price: [
-    [1,   3,   3,   3,   3,   3,   3],
-    [1/3, 1,   2,   2,   2,   2,   2],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1]
+    [1,   9,   7,   7,   7,   7,   9],
+    [1/9, 1,   1/5, 1/5, 1/5, 1/5, 1],
+    [1/7, 5,   1,   1,   1,   1,   5],
+    [1/7, 5,   1,   1,   1,   1,   5],
+    [1/7, 5,   1,   1,   1,   1,   5],
+    [1/7, 5,   1,   1,   1,   1,   5],
+    [1/9, 1,   1/5, 1/5, 1/5, 1/5, 1],
   ],
   durability: [
-    [1,   1/3, 1,   1/2, 1,   1,   1],
-    [3,   1,   3,   3,   3,   3,   3],
-    [1,   1/3, 1,   1/2, 1,   1,   1],
-    [2,   1/3, 2,   1,   2,   2,   2],
-    [1,   1/3, 1,   1/2, 1,   1,   1],
-    [1,   1/3, 1,   1/2, 1,   1,   1],
-    [1,   1/3, 1,   1/2, 1,   1,   1]
+    [1,   1/9, 1,   1,   1,   1,   1],
+    [9,   1,   9,   9,   9,   9,   5],
+    [1,   1/9, 1,   1,   1,   1,   1],
+    [1,   1/9, 1,   1,   1,   1,   1],
+    [1,   1/9, 1,   1,   1,   1,   1],
+    [1,   1/9, 1,   1,   1,   1,   1],
+    [1,   1/5, 1,   1,   1,   1,   1],
   ],
   feature: [
-    [1,   1,   1/2, 1,   1,   1/3, 1],
-    [1,   1,   1/2, 1,   1,   1/3, 1],
-    [2,   2,   1,   2,   2,   1/3, 2],
-    [1,   1,   1/2, 1,   1,   1/3, 1],
-    [1,   1,   1/2, 1,   1,   1/3, 1],
-    [3,   3,   3,   3,   3,   1,   3],
-    [1,   1,   1/2, 1,   1,   1/3, 1]
+    [1,   1/3, 1/7, 1/7, 1/5, 1/7, 1/3],
+    [3,   1,   1/5, 1/5, 1/7, 1/9, 1],
+    [7,   5,   1,   1,   1/3, 1/5, 5],
+    [7,   5,   1,   1,   1/3, 1/5, 5],
+    [5,   7,   3,   3,   1,   1/3, 7],
+    [7,   9,   5,   5,   3,   1,   9],
+    [3,   1,   1/5, 1/5, 1/7, 1/9, 1],
   ],
   layout: [
-    [1,   1,   1,   1,   1/3, 1,   1/2],
-    [1,   1,   1,   1,   1/3, 1,   1/2],
-    [1,   1,   1,   1,   1/3, 1,   1/2],
-    [1,   1,   1,   1,   1/3, 1,   1/2],
-    [3,   3,   3,   3,   1,   3,   3  ],
-    [1,   1,   1,   1,   1/3, 1,   1/2],
-    [2,   2,   2,   2,   1/3, 2,   1  ]
+    [1,   2,   1,   1,   1/5, 1/3, 1   ], // Harga
+    [1/2, 1,   1,   1,   1/5, 1/3, 1   ], // Garansi
+    [1,   1,   1,   1,   1/3, 1/2, 1   ], // Mode
+    [1,   1,   1,   1,   1/2, 1,   1   ], // Baterai
+    [5,   5,   3,   2,   1,   3,   3   ], // Layout
+    [3,   3,   2,   1,   1/3, 1,   2   ], // Fitur
+    [1,   1,   1,   1,   1/3, 1/2, 1   ],
   ],
   battery: [
-    [1,   1/2, 1,   1/3, 1,   1,   1],
-    [2,   1,   2,   1/3, 2,   2,   2],
-    [1,   1/2, 1,   1/3, 1,   1,   1],
-    [3,   3,   3,   1,   3,   3,   3],
-    [1,   1/2, 1,   1/3, 1,   1,   1],
-    [1,   1/2, 1,   1/3, 1,   1,   1],
-    [1,   1/2, 1,   1/3, 1,   1,   1]
+    [1,   1/5, 1/5, 1/7, 1/7, 1/7, 1/5],
+    [5,   1,   1,   1/7, 1/7, 1/7, 1],
+    [5,   1,   1,   1/7, 1/7, 1/7, 1],
+    [7,   7,   7,   1,   1/3, 1/3, 7],
+    [7,   7,   7,   3,   1,   1,   7],
+    [7,   7,   7,   3,   1,   1,   7],
+    [5,   1,   1,   1/7, 1/7, 1/7, 1],
   ],
-  balanced: Array(7).fill().map(()=>Array(7).fill(1))
+  balanced: Array(7).fill().map(() => Array(7).fill(1)),
 };
 
 const scenarioDescriptions = {
-  price: "Memprioritaskan kriteria Harga di atas kriteria lain (nilai perbandingan 5:1 terhadap kriteria lain).",
-  durability: "Memprioritaskan Garansi dan Bahan (nilai 5:1), mode lain menyesuaikan.",
-  feature: "Memprioritaskan Jumlah Fitur Tambahan (nilai 5:1).",
-  layout: "Memprioritaskan Ukuran Layout (nilai 5:1).",
-  battery: "Memprioritaskan kapasitas baterai (nilai 5:1).",
-  balanced: "Semua kriteria dianggap sama penting (nilai 1:1)."
+  price:      "Fokus utama pada Harga—harga dianggap 7–9 kali lebih penting dibanding kriteria lain.",
+  durability: "Fokus utama pada Garansi dan Kualitas Bahan—keduanya 9 kali lebih penting dibanding kriteria lain.",
+  feature:    "Fokus pada Fitur Tambahan (makro, RGB, dll) dan Layout—fitur 9×, layout 3–7× lebih penting.",
+  layout: "Memprioritaskan Ukuran Layout  sebagai faktor utama kenyamanan dan efisiensi kerja, dibandingkan kriteria lain.",
+  battery:    "Fokus pada Kapasitas Baterai—baterai 7× lebih penting, dukungan mode & garansi 5×.",
+  balanced:   "Semua kriteria dianggap sama penting (1:1).",
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -329,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const scenarioSelect = document.getElementById('ahpScenario');
   const scenarioDesc = document.getElementById('scenarioDescription');
   const loadScenarioBtn = document.getElementById('loadScenario');
+  const resetScenarioBtn = document.getElementById('resetScenario');
 
   if (scenarioSelect && scenarioDesc) {
     scenarioDesc.textContent = scenarioDescriptions[scenarioSelect.value] || '';
@@ -351,6 +352,23 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (i < j) {
               input.value = preset[i][j];
               // Trigger change event to update reciprocal
+              input.dispatchEvent(new Event('change'));
+            }
+          }
+        }
+      }
+    });
+  }
+  if (resetScenarioBtn) {
+    resetScenarioBtn.addEventListener('click', function() {
+      for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
+          const input = document.getElementById(`comparison_${i}_${j}`);
+          if (input) {
+            if (i === j) {
+              input.value = 1;
+            } else {
+              input.value = '';
               input.dispatchEvent(new Event('change'));
             }
           }

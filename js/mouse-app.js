@@ -265,50 +265,51 @@ document.addEventListener('DOMContentLoaded', () => {
 // Preset skenario AHP untuk Mouse
 const mouseScenarios = {
   price: [
-    [1,   3,   3,   3,   3,   3,   3],
-    [1/3, 1,   2,   2,   2,   2,   2],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1],
-    [1/3, 1/2, 1,   1,   1,   1,   1]
+    [1,   9,   7,   7,   7,   7,   7],
+    [1/9, 1,   1/5, 1/5, 1/5, 1/5, 1/5],
+    [1/7, 5,   1,   1,   1,   1,   1],
+    [1/7, 5,   1,   1,   1,   1,   1],
+    [1/7, 5,   1,   1,   1,   1,   1],
+    [1/7, 5,   1,   1,   1,   1,   1],
+    [1/7, 5,   1,   1,   1,   1,   1],
   ],
   durability: [
-    [1,   1/3, 1,   1,   1,   1,   1/2],
-    [3,   1,   3,   3,   3,   3,   3],
-    [1,   1/3, 1,   1,   1,   1,   1/2],
-    [1,   1/3, 1,   1,   1,   1,   1/2],
-    [1,   1/3, 1,   1,   1,   1,   1/2],
-    [1,   1/3, 1,   1,   1,   1,   1/2],
-    [2,   1/3, 2,   2,   2,   2,   1  ]
+    [1,   1/9, 1,   1,   1,   1,   1/5],
+    [9,   1,   9,   9,   9,   9,   5],
+    [1,   1/9, 1,   1,   1,   1,   1/5],
+    [1,   1/9, 1,   1,   1,   1,   1/5],
+    [1,   1/9, 1,   1,   1,   1,   1/5],
+    [1,   1/9, 1,   1,   1,   1,   1/5],
+    [5,   1/5, 5,   5,   5,   5,   1],
   ],
   performance: [
-    [1,   1,   1/2, 1/3, 1,   1/2, 1  ],
-    [1,   1,   1/2, 1/3, 1,   1/2, 1  ],
-    [2,   2,   1,   1/3, 2,   1,   2  ],
-    [3,   3,   3,   1,   3,   3,   3  ],
-    [1,   1,   1/2, 1/3, 1,   1/2, 1  ],
-    [2,   2,   1,   1/3, 2,   1,   2  ],
-    [1,   1,   1/2, 1/3, 1,   1/2, 1  ]
+    //           price      garansi    mode       DPI        berat      polling    battery
+    /* price */   [1,          3,         1,      1/7,       1/3,       1/5,       1/2],
+    /* garansi */ [1/3,        1,         1,      1/7,       1/3,       1/5,       1/2],
+    /* mode */    [1,          1,         1,      1/7,       1/3,       1/5,       1  ],
+    /* DPI */     [7,          7,         7,      1,         5,         3,         5  ],
+    /* berat */   [3,          3,         3,      1/5,       1,         1/3,       3  ],
+    /* polling */ [5,          5,         5,      1/3,       3,         1,         3  ],
+    /* battery */ [2,          2,         1,      1/5,       1/3,       1/3,       1  ],,
   ],
   battery: [
-    [1,   1/2, 1,   1,   1,   1,   1/3],
-    [2,   1,   2,   2,   2,   2,   1/3],
-    [1,   1/2, 1,   1,   1,   1,   1/3],
-    [1,   1/2, 1,   1,   1,   1,   1/3],
-    [1,   1/2, 1,   1,   1,   1,   1/3],
-    [1,   1/2, 1,   1,   1,   1,   1/3],
-    [3,   3,   3,   3,   3,   3,   1  ]
+    [1,   1/7, 1/7, 1/7, 1/7, 1/7, 1/9],
+    [7,   1,   1,   1,   1,   1,   1/3],
+    [7,   1,   1,   1,   1,   1,   1/3],
+    [7,   1,   1,   1,   1,   1,   1/3],
+    [7,   1,   1,   1,   1,   1,   1/3],
+    [7,   1,   1,   1,   1,   1,   1/3],
+    [9,   3,   3,   3,   3,   3,   1],
   ],
-  balanced: Array(7).fill().map(()=>Array(7).fill(1))
+  balanced: Array(7).fill().map(() => Array(7).fill(1)),
 };
 
 const scenarioDescriptions = {
-  price: "Memprioritaskan kriteria Harga di atas kriteria lain (nilai perbandingan 5:1 terhadap kriteria lain).",
-  durability: "Memprioritaskan Garansi dan Bahan (nilai 5:1), mode lain menyesuaikan.",
-  performance: "Memprioritaskan DPI dan Polling Rate (nilai 5:1).",
-  battery: "Memprioritaskan kapasitas baterai (nilai 5:1).",
-  balanced: "Semua kriteria dianggap sama penting (nilai 1:1)."
+  price:       "Fokus utama pada Harga—harga 7–9× lebih penting dibanding kriteria lain.",
+  durability:  "Fokus pada Garansi—garansi 9× lebih penting, baterai 5× mendukung keandalan.",
+  performance: "Fokus pada Kinerja: DPI dan Polling Rate paling penting (DPI 7×, Polling 3×), diikuti Berat (3×) dan Baterai (2×); Price dan Garansi diprioritaskan rendah.",
+  battery:     "Fokus pada Kapasitas Baterai—baterai 9× lebih penting; garansi & mode koneksi 7×.",
+  balanced:    "Semua kriteria dianggap sama penting (1:1).",
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -316,6 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const scenarioSelect = document.getElementById('ahpScenario');
   const scenarioDesc = document.getElementById('scenarioDescription');
   const loadScenarioBtn = document.getElementById('loadScenario');
+  const resetScenarioBtn = document.getElementById('resetScenario');
 
   if (scenarioSelect && scenarioDesc) {
     scenarioDesc.textContent = scenarioDescriptions[scenarioSelect.value] || '';
@@ -324,6 +326,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (resetScenarioBtn) {
+    resetScenarioBtn.addEventListener('click', function() {
+      for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
+          const input = document.getElementById(`comparison_${i}_${j}`);
+          if (input) {
+            if (i === j) {
+              input.value = 1;
+            } else {
+              input.value = '';
+              input.dispatchEvent(new Event('change'));
+            }
+          }
+        }
+      }
+    });
+  }
   if (loadScenarioBtn && scenarioSelect) {
     loadScenarioBtn.addEventListener('click', function() {
       const preset = mouseScenarios[scenarioSelect.value];
