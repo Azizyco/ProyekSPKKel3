@@ -892,6 +892,27 @@ textarea:focus {
   .home-footer {
     top: 80%;
   }
+  .gg--2 {
+    top: 65%;
+    left: 0%;
+  }
+  .gg--1 {
+    top: 20%;
+    left: 0%;
+  }
+  .gg--3 {
+    top: 5%;
+    right: 2%;
+  }
+  .gg--4 {
+    top: 1%;
+    left: 25%;
+  }
+  .gg--5 {
+    font-size: 300px;
+    top: 55%;
+    right: 5%;
+  }
 }
 @media screen and (max-width: 992px) {
   .visualization {
@@ -904,6 +925,19 @@ textarea:focus {
   .home-footer {
     top: 82%;
   }
+  .gg--3 {
+    top: 2%;
+    right: 2%;
+  }
+  .gg--4 {
+    top: -2%;
+    left: 10%;
+  }
+  .gg--5 {
+    font-size: 300px;
+    top: 59%;
+    right: 5%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -912,6 +946,10 @@ textarea:focus {
   }
   .content-header-toggle {
     display: block !important;
+  }
+  .gg--2 {
+    top: 70%;
+    left: 0;
   }
 }
 
@@ -967,7 +1005,20 @@ textarea:focus {
     display: none;
   }
 }
-
+@media (max-width: 425px) {
+  .gg--2, .gg--4, .gg--5 {
+    display: none;
+  }
+  .gg--1 {
+    top: -5%;
+    right: 1%;
+    font-size: small;
+  }
+  .gg--3 {
+    top: 75%;
+    left: 0;
+  }
+}
 /* Dark mode helper for rgba values */
 :root {
   --primary-color-rgb: 51, 102, 204;
