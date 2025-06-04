@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #297dca;
-  --primary-light: #0447c4;
-  --primary-dark: #125594;
+  --primary-color: #01274b;
+  --primary-light: #305daf;
+  --primary-dark: #043766;
   
   --secondary-color: #00A896;
   --secondary-light: #02C3B2;
@@ -43,9 +43,9 @@
 
 /* Dark Theme */
 [data-theme="dark"] {
-  --primary-color: #018fee;
-  --primary-light: #001658;
-  --primary-dark: #0492ca;
+  --primary-color: #0083da;
+  --primary-light: #001144;
+  --primary-dark: #00445f;
   
   --secondary-color: #00BFB2;
   --secondary-light: #02D8CB;
@@ -132,41 +132,66 @@ input, select, textarea {
   background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
   padding: var(--spacing-md);
   position: relative;
+  overflow: hidden;
 }
 
 .home-content {
-  max-width: 600px;
+  top: 6%;
+  max-width: 950px;
   text-align: center;
-  background-color: var(--card-color);
-  padding: var(--spacing-xl);
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(30px);
+  padding: var(--spacing-md);
   border-radius: var(--border-radius-lg);
   box-shadow: 0 8px 30px var(--shadow-color);
   animation: fadeIn 0.8s ease-out;
 }
 
+.background-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 108vh;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.home-container, .home-content, .home-footer {
+  position: relative;
+  z-index: 1;
+}
+
 .home-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: var(--primary-color);
   margin-bottom: var(--spacing-sm);
 }
 
 .home-subtitle {
-  font-size: 1.2rem;
-  color: var(--text-light);
+  font-size: 1rem;
+  color: white;
   margin-bottom: var(--spacing-xl);
 }
 
 .home-buttons {
+  position: relative;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .home-guide-link {
   display: inline-block;
-  margin-top: var(--spacing-md);
-  color: var(--text-light);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  color: whitesmoke;
   text-decoration: underline;
   transition: color var(--transition-speed);
 }
@@ -185,6 +210,59 @@ input, select, textarea {
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-md);
+}
+.hero__bg-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.gambar-gg {
+  position: absolute;
+  font-family: 'Times New Roman', serif;
+  color: var(--accent);
+  opacity: 0.05;
+  font-weight: bold;
+  user-select: none;
+}
+
+.gg--1 {
+  font-size: 300px;
+  top: 10%;
+  left: 5%;
+  animation: float 10s ease-in-out infinite;
+}
+
+.gg--2 {
+  font-size: 150px;
+  bottom: 1%;
+  left: 10%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.gg--3 {
+  font-size: 180px;
+  top: 6%;
+  right: 10%;
+  animation: float 12s ease-in-out infinite;
+}
+
+.gg--4 {
+  font-size: 160px;
+  top: 1%;
+  right: 40%;
+  animation: float 9s ease-in-out infinite reverse;
+}
+
+.gg--5 {
+  font-size: 220px;
+  top: 65%;
+  right: 5%;
+  animation: float 11s ease-in-out infinite;
 }
 
 /* Button Styles */
@@ -727,6 +805,34 @@ textarea:focus {
 }
 
 /* Animations */
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -784,7 +890,7 @@ textarea:focus {
 
 @media screen and (max-width: 1200px) {
   .home-footer {
-    top: 82%;
+    top: 80%;
   }
 }
 @media screen and (max-width: 992px) {
@@ -852,8 +958,10 @@ textarea:focus {
     margin-top: 50px;
   }
   .home-footer {
-    position: relative;
-    gap: 2px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    gap: 0,5px;
   }
   .home-footer p{
     display: none;
