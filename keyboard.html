@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPK Keyboard Wireless/Bluetooth</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>SPK Mouse & Keyboard</h2>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="main.html">Beranda</a></li>
+        <li><a href="mouse.html">SPK Mouse</a></li>
+        <li><a href="keyboard.html" class="active">SPK Keyboard</a></li>
+        <li><a href="panduan.html">Panduan</a></li>
+      </ul>
+      <div class="theme-toggle" id="themeToggle">
+        <span class="theme-toggle-icon light">☀️</span>
+        <span class="theme-toggle-icon dark">🌙</span>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="content-header" style="position:relative;">
+        <button class="sidebar-toggle content-header-toggle" id="contentHeaderSidebarToggle" aria-label="Buka Navigasi" style="position:fixed;font-size :2rem ;top:40px;right: 20px;;transform:translateY(-50%);display:none;z-index:1200;">☰</button>
+        <h1>Sistem Pendukung Keputusan Keyboard Wireless/Bluetooth</h1>
+      </header>
+
+      <div class="content-body">
+        <div class="card">
+          <div class="card-header">
+            <h2>1. Pengaturan Kriteria</h2>
+          </div>
+          <div class="card-body">
+            <div class="criteria-container" id="criteriaContainer">
+              <div class="criteria-list">
+                <div class="criteria-item">
+                  <span class="criteria-name">Harga</span>
+                  <div class="criteria-type">
+                    <label><input type="radio" name="harga-type" value="cost" checked> Cost</label>
+                    <label><input type="radio" name="harga-type" value="benefit"> Benefit</label>
+                  </div>
+                </div>
+
+                <div class="criteria-item">
+                  <span class="criteria-name">Garansi (bulan)</span>
+                  <div class="criteria-type">
+                    <label><input type="radio" name="garansi-type" value="cost"> Cost</label>
+                    <label><input type="radio" name="garansi-type" value="benefit" checked> Benefit</label>
+                  </div>
+                </div>
+
+                <div class="criteria-item">
+                  <span class="criteria-name">Jumlah Mode</span>
+                  <div class="criteria-type">
+                    <label><input type="radio" name="mode-type" value="cost"> Cost</label>
+                    <label><input type="radio" name="mode-type" value="benefit" checked> Benefit</label>
+                  </div>
+                </div>
+
+                <div class="criteria-item">
+                  <span class="criteria-name">Kapasitas Baterai (mAh)</span>
+                  <div class="criteria-type">
+                    <label><input type="radio" name="battery-type" value="cost"> Cost</label>
+                    <label><input type="radio" name="battery-type" value="benefit" checked> Benefit</label>
+                  </div>
+                </div>
+
+                <div class="criteria-item">
+                  <span class="criteria-name">Ukuran Layout (%)</span>
+                  <div class="criteria-type">
+                    <label><input type="radio" name="layout-type" value="cost"> Cost</label>
+                    <label><input type="radio" name="layout-type" value="benefit" checked> Benefit</label>
+                  </div>
+                </div>
+
+                <div class="criteria-item">
+                  <span class="criteria-name">Jumlah Fitur Tambahan</span>
+                  <div class="criteria-type">
+                    <label><input type="radio" name="features-type" value="cost"> Cost</label>
+                    <label><input type="radio" name="features-type" value="benefit" checked> Benefit</label>
+                  </div>
+                </div>
+
+                <div class="criteria-item">
+                  <span class="criteria-name">Bahan Keyboard</span>
+                  <div class="criteria-type">
+                    <label><input type="radio" name="material-type" value="cost"> Cost</label>
+                    <label><input type="radio" name="material-type" value="benefit" checked> Benefit</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>2. Matriks Perbandingan Berpasangan (AHP)</h2>
+          </div>
+          <div class="card-body">
+            <div class="scenario-container" style="margin-bottom:1rem;display:flex;align-items:center;gap:1rem;">
+              <label for="ahpScenario">Pilih Skenario AHP:</label>
+              <select id="ahpScenario">
+                <option value="price">Harga Prioritas</option>
+                <option value="durability">Durabilitas Prioritas</option>
+                <option value="feature">Fitur Prioritas</option>
+                <option value="layout">Layout Prioritas</option>
+                <option value="battery">Baterai Prioritas</option>
+                <option value="balanced">Balanced</option>
+              </select>
+              <button class="btn btn-secondary" id="loadScenario">Muat Skenario</button>
+              <button class="btn btn-danger" id="resetScenario">Reset</button>
+            </div>
+            <p id="scenarioDescription" style="margin-bottom:1rem;"></p>
+            <div class="matrix-container" id="matrixContainer">
+              <!-- Matrix will be generated by JavaScript -->
+            </div>
+            <div class="ahp-result" id="ahpResult">
+              <!-- AHP results will be displayed here -->
+            </div>
+            <button class="btn btn-primary" id="calculateAHP">Hitung Bobot Kriteria</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>3. Input Data Alternatif</h2>
+          </div>
+          <div class="card-body">
+            <div class="alternatives-container">
+              <div class="alternative-form">
+                <div class="form-group">
+                  <label for="altName">Nama Keyboard</label>
+                  <input type="text" id="altName" placeholder="Contoh: Keychron K2">
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="altPrice">Harga (Rp)</label>
+                    <input type="number" id="altPrice" placeholder="Contoh: 1200000">
+                  </div>
+                  <div class="form-group">
+                    <label for="altWarranty">Garansi (bulan)</label>
+                    <input type="number" id="altWarranty" placeholder="Contoh: 12">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="altModes">Jumlah Mode</label>
+                    <input type="number" id="altModes" placeholder="Contoh: 3">
+                  </div>
+                  <div class="form-group">
+                    <label for="altBattery">Kapasitas Baterai (mAh)</label>
+                    <input type="number" id="altBattery" placeholder="Contoh: 4000">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="altLayout">Ukuran Layout (%)</label>
+                    <select id="altLayout">
+                      <option value="100">100% (Full Size)</option>
+                      <option value="80">80% (TKL)</option>
+                      <option value="75">75%</option>
+                      <option value="65">65%</option>
+                      <option value="60">60%</option>
+                      <option value="40">40%</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="altFeatures">Jumlah Fitur Tambahan</label>
+                    <input type="number" id="altFeatures" placeholder="Contoh: 4">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="altMaterial">Bahan Keyboard</label>
+                  <select id="altMaterial">
+                    <option value="1">Plastik Biasa</option>
+                    <option value="2">ABS Plastik</option>
+                    <option value="3">Kombinasi ABS+Metal</option>
+                    <option value="4">PBT</option>
+                    <option value="5">Aluminium Full Body</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" id="addAlternative">Tambah Alternatif</button>
+              </div>
+
+              <div class="alternatives-list-container">
+                <h3>Daftar Alternatif</h3>
+                <div class="alternatives-list" id="alternativesList">
+                  <!-- Alternatives will be displayed here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>4. Hasil Perhitungan SAW</h2>
+          </div>
+          <div class="card-body">
+            <button class="btn btn-primary" id="calculateSAW">Hitung Ranking</button>
+            <div class="saw-result" id="sawResult">
+              <!-- SAW results will be displayed here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>5. Visualisasi</h2>
+          </div>
+          <div class="card-body visualization">
+            <div class="chart-container">
+              <h3>Top 5 Alternatif</h3>
+              <canvas id="barChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <h3>Profil Produk vs Ideal</h3>
+              <canvas id="radarChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>6. Ekspor Hasil</h2>
+          </div>
+          <div class="card-body">
+            <div class="export-buttons">
+              <button class="btn btn-primary" id="exportPDF">
+                <span>Download PDF</span>
+              </button>
+              <button class="btn btn-secondary" id="printResult">
+                <span>Cetak Hasil</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal for alternative details -->
+  <div class="modal" id="alternativeModal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-header">
+        <h2 id="modalTitle">Detail Alternatif</h2>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Alternative details will be displayed here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/ahp.js"></script>
+  <script src="js/saw.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/keyboard-app.js"></script>
+</body>
+</html>
