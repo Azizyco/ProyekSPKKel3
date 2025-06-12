@@ -564,10 +564,14 @@ textarea:focus {
 }
 
 .matrix-table {
-  width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
+  overflow-x: auto;
 }
-
+.matrix-table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
 .matrix-table th,
 .matrix-table td {
   padding: var(--spacing-md);

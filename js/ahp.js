@@ -36,7 +36,6 @@ function createComparisonMatrix(criteriaNames) {
   for (let i = 0; i < criteriaNames.length; i++) {
     html += `<tr>
       <th>${criteriaNames[i]}</th>`;
-    
     for (let j = 0; j < criteriaNames.length; j++) {
       if (i === j) {
         // Diagonal elements are always 1
@@ -49,9 +48,14 @@ function createComparisonMatrix(criteriaNames) {
         html += `<td><input type="text" id="comparison_${i}_${j}" disabled></td>`;
       }
     }
-    
     html += `</tr>`;
   }
+  // Add row for column sums
+  html += `<tr><th>Jumlah</th>`;
+  for (let j = 0; j < criteriaNames.length; j++) {
+    html += `<td id="colSum_${j}">0</td>`;
+  }
+  html += `</tr>`;
   
   html += `
         </tbody>
@@ -61,11 +65,29 @@ function createComparisonMatrix(criteriaNames) {
   
   container.innerHTML = html;
   
-  // Add event listeners to update reciprocal values
+  // Function to update column sums
+  function updateColSums() {
+    const n = criteriaNames.length;
+    for (let j = 0; j < n; j++) {
+      let sum = 0;
+      for (let i = 0; i < n; i++) {
+        const input = document.getElementById(`comparison_${i}_${j}`);
+        sum += parseFraction(input.value);
+      }
+      document.getElementById(`colSum_${j}`).textContent = sum.toFixed(3);
+    }
+  }
+  
+  // Add event listeners to update reciprocal values and column sums
   const inputs = document.querySelectorAll('.comparison-input');
   inputs.forEach(input => {
-    input.addEventListener('change', updateReciprocalValue);
+    input.addEventListener('change', function(e) {
+      updateReciprocalValue(e);
+      updateColSums();
+    });
   });
+  // Initial update
+  updateColSums();
 }
 
 // Update reciprocal values when a comparison value changes
@@ -150,6 +172,7 @@ function calculateAHP(criteriaNames) {
   return {
     weights,
     normalizedMatrix,
+    matrix,
     CI,
     CR,
     lambda,
@@ -159,33 +182,83 @@ function calculateAHP(criteriaNames) {
 
 // Calculate consistency ratio
 function calculateConsistency(matrix, weights, n) {
-  // Calculate lambda max
-  const lambdas = [];
-  
+  // Hitung eigen value total (lambda) sesuai tabel normalisasi
+  let eigenSum = 0;
   for (let i = 0; i < n; i++) {
-    let sum = 0;
+    let rowSumMatrix = 0;
     for (let j = 0; j < n; j++) {
-      sum += matrix[i][j] * weights[j];
+      rowSumMatrix += matrix[j][i];
     }
-    lambdas.push(sum / weights[i]);
+    eigenSum += weights[i] * rowSumMatrix;
   }
-  
-  const lambda = lambdas.reduce((a, b) => a + b, 0) / n;
-  
+  const lambda = eigenSum;
   // Calculate consistency index
   const CI = (lambda - n) / (n - 1);
-  
   // Random index values for n = 1 to 10
   const RI = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49];
-  
   // Calculate consistency ratio
-  const CR = CI / (n <= 10 ? RI[n - 1] : 1.49);
-  
+  const CR = CI / (n <= 10 ? RI[n - 1] : 1.32);
   return { CI, CR, lambda };
+}
+
+// Render normalization table for AHP
+function renderNormalizationTable(result, criteriaNames) {
+  const matrix = result.matrix;
+  const n = criteriaNames.length;
+  let html = ` <h4> </h4><h4>Tabel Normalisasi Matriks, Jumlah, Prioritas, dan Eigen Value</h4>`;
+  html += `<div class="matrix-table-container"><table class="matrix-table"><thead><tr><th>Normalisasi</th>`;
+  for (let j = 0; j < n; j++) {
+    html += `<th>${criteriaNames[j]}</th>`;
+  }
+  html += `<th>Jumlah</th><th>Prioritas</th><th>Eigen Value</th></tr></thead><tbody>`;
+  for (let i = 0; i < n; i++) {
+    let rowSum = 0;
+    html += `<tr><th>${criteriaNames[i]}</th>`;
+    for (let j = 0; j < n; j++) {
+      html += `<td>${result.normalizedMatrix[i][j].toFixed(9)}</td>`;
+      rowSum += result.normalizedMatrix[i][j];
+    }
+    html += `<td>${rowSum.toFixed(9)}</td>`;
+    html += `<td>${result.weights[i].toFixed(9)}</td>`;
+    // Eigen value untuk setiap baris: prioritas (bobot) baris dikali jumlah pada matriks perbandingan baris tersebut
+    let rowSumMatrix = 0;
+    for (let j = 0; j < n; j++) {
+      rowSumMatrix += matrix[j][i];
+    }
+    let eig = result.weights[i] * rowSumMatrix;
+    html += `<td>${eig.toFixed(9)}</td>`;
+    html += `</tr>`;
+  }
+  // Tambahkan penjumlahan eigen value
+  let eigenSum = 0;
+  for (let i = 0; i < n; i++) {
+    let rowSumMatrix = 0;
+    for (let j = 0; j < n; j++) {
+      rowSumMatrix += matrix[j][i];
+    }
+    eigenSum += result.weights[i] * rowSumMatrix;
+  }
+  // Add sum row
+  html += `<tr><th>Jumlah</th>`;
+  for (let j = 0; j < n; j++) {
+    let colSum = 0;
+    for (let i = 0; i < n; i++) {
+      colSum += result.normalizedMatrix[i][j];
+    }
+    html += `<td>${colSum.toFixed(8)}</td>`;
+  }
+  html += `<td>${n}</td><td>1</td><td>${eigenSum.toFixed(9)}</td></tr>`;
+  html += `</tbody></table></div>`;
+  // Tambahkan keterangan bahwa jumlah eigen value adalah lambda
+  html += `<div style='margin-top:8px;font-style:italic;color:#555;'>Jumlah total eigen value = ${eigenSum.toFixed(9)} adalah Lambda (\u03BB<sub>max</sub>)</div>`;
+  return html;
 }
 
 // Display AHP results
 function displayAHPResults(result, criteriaNames, criteriaTypes) {
+  // Render normalization table
+  renderNormalizationTable(result, criteriaNames);
+
   const resultContainer = document.getElementById('ahpResult');
   if (!resultContainer) return;
   
@@ -221,9 +294,9 @@ function displayAHPResults(result, criteriaNames, criteriaTypes) {
       
       <div class="consistency-container">
         <h4>Konsistensi</h4>
-        <p>Lambda Max: ${result.lambda.toFixed(4)}</p>
-        <p>Consistency Index (CI): ${result.CI.toFixed(4)}</p>
-        <p>Consistency Ratio (CR): ${result.CR.toFixed(4)}</p>
+        <p>Lambda Max: ${result.lambda.toFixed(9)}</p>
+        <p>Consistency Index (CI): ${result.CI.toFixed(9)}</p>
+        <p>Consistency Ratio (CR): ${result.CR.toFixed(9)}</p>
         <p class="consistency-status ${result.consistent ? 'consistent' : 'inconsistent'}">
           ${result.consistent 
             ? '✓ Konsisten (CR < 0.1)' 
@@ -235,6 +308,16 @@ function displayAHPResults(result, criteriaNames, criteriaTypes) {
   
   resultContainer.innerHTML = html;
   
+  // Add normalization table below weights and consistency
+  const normalizationTable = document.getElementById('normalizationTable');
+  if (normalizationTable) {
+    normalizationTable.remove();
+  }
+  const normDiv = document.createElement('div');
+  normDiv.id = 'normalizationTable';
+  normDiv.innerHTML = renderNormalizationTable(result, criteriaNames);
+  resultContainer.appendChild(normDiv);
+
   // Add styles
   const style = document.createElement('style');
   style.textContent = `
