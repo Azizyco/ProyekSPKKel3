@@ -215,18 +215,18 @@ function renderNormalizationTable(result, criteriaNames) {
     let rowSum = 0;
     html += `<tr><th>${criteriaNames[i]}</th>`;
     for (let j = 0; j < n; j++) {
-      html += `<td>${result.normalizedMatrix[i][j].toFixed(9)}</td>`;
+      html += `<td>${result.normalizedMatrix[i][j].toFixed(3)}</td>`;
       rowSum += result.normalizedMatrix[i][j];
     }
-    html += `<td>${rowSum.toFixed(9)}</td>`;
-    html += `<td>${result.weights[i].toFixed(9)}</td>`;
+    html += `<td>${rowSum.toFixed(3)}</td>`;
+    html += `<td>${result.weights[i].toFixed(4)}</td>`;
     // Eigen value untuk setiap baris: prioritas (bobot) baris dikali jumlah pada matriks perbandingan baris tersebut
     let rowSumMatrix = 0;
     for (let j = 0; j < n; j++) {
       rowSumMatrix += matrix[j][i];
     }
     let eig = result.weights[i] * rowSumMatrix;
-    html += `<td>${eig.toFixed(9)}</td>`;
+    html += `<td>${eig.toFixed(3)}</td>`;
     html += `</tr>`;
   }
   // Tambahkan penjumlahan eigen value
@@ -245,12 +245,12 @@ function renderNormalizationTable(result, criteriaNames) {
     for (let i = 0; i < n; i++) {
       colSum += result.normalizedMatrix[i][j];
     }
-    html += `<td>${colSum.toFixed(8)}</td>`;
+    html += `<td>${colSum.toFixed(3)}</td>`;
   }
-  html += `<td>${n}</td><td>1</td><td>${eigenSum.toFixed(9)}</td></tr>`;
+  html += `<td>${n}</td><td>1</td><td>${eigenSum.toFixed(3)}</td></tr>`;
   html += `</tbody></table></div>`;
   // Tambahkan keterangan bahwa jumlah eigen value adalah lambda
-  html += `<div style='margin-top:8px;font-style:italic;color:#555;'>Jumlah total eigen value = ${eigenSum.toFixed(9)} adalah Lambda (\u03BB<sub>max</sub>)</div>`;
+  html += `<div style='margin-top:8px;font-style:italic;color:#555;'>Jumlah total eigen value = ${eigenSum.toFixed(3)} adalah Lambda (\u03BB<sub>max</sub>)</div>`;
   return html;
 }
 
@@ -294,9 +294,9 @@ function displayAHPResults(result, criteriaNames, criteriaTypes) {
       
       <div class="consistency-container">
         <h4>Konsistensi</h4>
-        <p>Lambda Max: ${result.lambda.toFixed(9)}</p>
-        <p>Consistency Index (CI): ${result.CI.toFixed(9)}</p>
-        <p>Consistency Ratio (CR): ${result.CR.toFixed(9)}</p>
+        <p>Lambda Max: ${result.lambda.toFixed(3)}</p>
+        <p>Consistency Index (CI): ${result.CI.toFixed(3)}</p>
+        <p>Consistency Ratio (CR): ${result.CR.toFixed(3)}</p>
         <p class="consistency-status ${result.consistent ? 'consistent' : 'inconsistent'}">
           ${result.consistent 
             ? '✓ Konsisten (CR < 0.1)' 
