@@ -276,52 +276,11 @@ const keyboardScenarios = {
     [1/2, 2, 1/2, 1/2, 1/2,   1,   2],
     [1/3, 2, 1/2, 1/2, 1/2, 1/2,   1],
   ],
-  durability: [
-    [1,   1/9, 1,   1,   1,   1,   1],
-    [9,   1,   9,   9,   9,   9,   5],
-    [1,   1/9, 1,   1,   1,   1,   1],
-    [1,   1/9, 1,   1,   1,   1,   1],
-    [1,   1/9, 1,   1,   1,   1,   1],
-    [1,   1/9, 1,   1,   1,   1,   1],
-    [1,   1/5, 1,   1,   1,   1,   1],
-  ],
-  feature: [
-    [1,   1/3, 1/7, 1/7, 1/5, 1/7, 1/3],
-    [3,   1,   1/5, 1/5, 1/7, 1/9, 1],
-    [7,   5,   1,   1,   1/3, 1/5, 5],
-    [7,   5,   1,   1,   1/3, 1/5, 5],
-    [5,   7,   3,   3,   1,   1/3, 7],
-    [7,   9,   5,   5,   3,   1,   9],
-    [3,   1,   1/5, 1/5, 1/7, 1/9, 1],
-  ],
-  layout: [
-    [1,   2,   1,   1,   1/5, 1/3, 1   ], // Harga
-    [1/2, 1,   1,   1,   1/5, 1/3, 1   ], // Garansi
-    [1,   1,   1,   1,   1/3, 1/2, 1   ], // Mode
-    [1,   1,   1,   1,   1/2, 1,   1   ], // Baterai
-    [5,   5,   3,   2,   1,   3,   3   ], // Layout
-    [3,   3,   2,   1,   1/3, 1,   2   ], // Fitur
-    [1,   1,   1,   1,   1/3, 1/2, 1   ],
-  ],
-  battery: [
-    [1,   1/5, 1/5, 1/7, 1/7, 1/7, 1/5],
-    [5,   1,   1,   1/7, 1/7, 1/7, 1],
-    [5,   1,   1,   1/7, 1/7, 1/7, 1],
-    [7,   7,   7,   1,   1/3, 1/3, 7],
-    [7,   7,   7,   3,   1,   1,   7],
-    [7,   7,   7,   3,   1,   1,   7],
-    [5,   1,   1,   1/7, 1/7, 1/7, 1],
-  ],
-  balanced: Array(7).fill().map(() => Array(7).fill(1)),
+
 };
 
 const scenarioDescriptions = {
-  price:      "Fokus utama pada Harga—harga dianggap 7–9 kali lebih penting dibanding kriteria lain.",
-  durability: "Fokus utama pada Garansi dan Kualitas Bahan—keduanya 9 kali lebih penting dibanding kriteria lain.",
-  feature:    "Fokus pada Fitur Tambahan (makro, RGB, dll) dan Layout—fitur 9×, layout 3–7× lebih penting.",
-  layout: "Memprioritaskan Ukuran Layout  sebagai faktor utama kenyamanan dan efisiensi kerja, dibandingkan kriteria lain.",
-  battery:    "Fokus pada Kapasitas Baterai—baterai 7× lebih penting, dukungan mode & garansi 5×.",
-  balanced:   "Semua kriteria dianggap sama penting (1:1).",
+  price:      "Memadukan prioritas pasar (harga), kebutuhan fungsional (mode koneksi & baterai), dan preferensi sekunder (fitur, garansi, bahan, layout) dalam satu struktur AHP.",
 };
 
 document.addEventListener('DOMContentLoaded', () => {
