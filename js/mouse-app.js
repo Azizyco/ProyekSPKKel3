@@ -274,43 +274,11 @@ const mouseScenarios = {
     [5, 1/4, 1/3,   1, 1/2, 1/2,   1],
 
   ],
-  durability: [
-    [1,   1/9, 1,   1,   1,   1,   1/5],
-    [9,   1,   9,   9,   9,   9,   5],
-    [1,   1/9, 1,   1,   1,   1,   1/5],
-    [1,   1/9, 1,   1,   1,   1,   1/5],
-    [1,   1/9, 1,   1,   1,   1,   1/5],
-    [1,   1/9, 1,   1,   1,   1,   1/5],
-    [5,   1/5, 5,   5,   5,   5,   1],
-  ],
-  performance: [
-    //           price      garansi    mode       DPI        berat      polling    battery
-    /* price */   [1,          3,         1,      1/7,       1/3,       1/5,       1/2],
-    /* garansi */ [1/3,        1,         1,      1/7,       1/3,       1/5,       1/2],
-    /* mode */    [1,          1,         1,      1/7,       1/3,       1/5,       1  ],
-    /* DPI */     [7,          7,         7,      1,         5,         3,         5  ],
-    /* berat */   [3,          3,         3,      1/5,       1,         1/3,       3  ],
-    /* polling */ [5,          5,         5,      1/3,       3,         1,         3  ],
-    /* battery */ [2,          2,         1,      1/5,       1/3,       1/3,       1  ],,
-  ],
-  battery: [
-    [1,   1/7, 1/7, 1/7, 1/7, 1/7, 1/9],
-    [7,   1,   1,   1,   1,   1,   1/3],
-    [7,   1,   1,   1,   1,   1,   1/3],
-    [7,   1,   1,   1,   1,   1,   1/3],
-    [7,   1,   1,   1,   1,   1,   1/3],
-    [7,   1,   1,   1,   1,   1,   1/3],
-    [9,   3,   3,   3,   3,   3,   1],
-  ],
-  balanced: Array(7).fill().map(() => Array(7).fill(1)),
 };
 
 const scenarioDescriptions = {
-  price:       "Fokus utama pada Harga—harga 7–9× lebih penting dibanding kriteria lain.",
-  durability:  "Fokus pada Garansi—garansi 9× lebih penting, baterai 5× mendukung keandalan.",
-  performance: "Fokus pada Kinerja: DPI dan Polling Rate paling penting (DPI 7×, Polling 3×), diikuti Berat (3×) dan Baterai (2×); Price dan Garansi diprioritaskan rendah.",
-  battery:     "Fokus pada Kapasitas Baterai—baterai 9× lebih penting; garansi & mode koneksi 7×.",
-  balanced:    "Semua kriteria dianggap sama penting (1:1).",
+  price:       "Fokus utama dalam skenario ini adalah keandalan jangka panjang dan fleksibilitas fungsional sebuah mouse, bukan harganya.",
+
 };
 
 document.addEventListener('DOMContentLoaded', () => {
