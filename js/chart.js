@@ -95,12 +95,23 @@ function createRadarChart(results, criteriaNames, criteriaTypes) {
   // Create datasets
   const bestProductData = [];
   const idealData = [];
-  
+
+  // Hitung rata-rata tiap kriteria dari seluruh alternatif
+  const avgByCriteria = {};
+  criteriaNames.forEach((name, i) => {
+    const key = getCriteriaKey(name);
+    let sum = 0;
+    results.forEach(r => {
+      sum += r.normalizedValues[key];
+    });
+    avgByCriteria[key] = sum / results.length;
+  });
+
   // Fill datasets
   criteriaNames.forEach((name, i) => {
     const key = getCriteriaKey(name);
     bestProductData.push(bestProduct.normalizedValues[key]);
-    idealData.push(1); // Ideal is always 1 (normalized maximum)
+    idealData.push(avgByCriteria[key]); // Ideal diubah menjadi rata-rata alternatif
   });
   
   // Destroy existing chart if it exists

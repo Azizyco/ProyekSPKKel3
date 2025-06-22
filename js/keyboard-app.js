@@ -102,9 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
       warrantyInput.value = '';
       modesInput.value = '';
       batteryInput.value = '';
-      layoutInput.value = '100';
+      layoutInput.value = '';
       featuresInput.value = '';
-      materialInput.value = '2';
+      materialInput.value = '';
       
       // Focus on name input
       nameInput.focus();
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       keyboardData.alternatives.forEach(alt => {
         // Format material display
         const materials = ['Plastik Biasa', 'ABS Plastik', 'Kombinasi ABS+Metal', 'PBT', 'Aluminium Full Body'];
-        const materialDisplay = materials[alt.material - 1] || '';
+        const materialDisplay = materials[alt.material - 0] || '';
         
         html += `
           <div class="alternative-item" data-id="${alt.id}">

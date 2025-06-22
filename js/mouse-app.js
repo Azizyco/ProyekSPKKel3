@@ -277,7 +277,7 @@ const mouseScenarios = {
 };
 
 const scenarioDescriptions = {
-  price:       "Fokus utama dalam skenario ini adalah keandalan jangka panjang dan fleksibilitas fungsional sebuah mouse, bukan harganya.",
+  price:       "Fokus utama dalam skenario ini adalah memprioritaskan produk dengan harga semurah mungkin, namun tetap menawarkan daya tahan baterai yang lama dan DPI yang tinggi sebagai nilai tambah utama.",
 
 };
 
