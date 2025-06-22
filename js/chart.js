@@ -51,6 +51,20 @@ function createBarChart(results) {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
+        x: {
+          ticks: {
+            maxRotation: 30,
+            minRotation: 0,
+            autoSkip: false,
+            callback: function(value, index, values) {
+              let label = this.getLabelForValue(value);
+              if (window.innerWidth < 600 && label.length > 8) {
+                return label.slice(0, 8) + '...';
+              }
+              return label;
+            }
+          }
+        },
         y: {
           beginAtZero: true,
           max: 1,
